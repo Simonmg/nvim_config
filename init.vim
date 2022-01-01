@@ -1,4 +1,8 @@
-source ~/.config/nvim/plug.vim
+if has('win32')
+ source ~/AppData/local/nvim/plug.vim
+else
+  source ~/.config/nvim/plug.vim
+endif
 
 set mouse=a
 

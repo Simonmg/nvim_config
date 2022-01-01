@@ -6,6 +6,8 @@ set mouse=a
 syntax enable
 colorscheme dracula
 
+"" set tab with spaces
+set tabstop=2 shiftwidth=2 expandtab
 
 " show hover doc
 nnoremap <silent>K :Lspsaga hover_doc<CR>

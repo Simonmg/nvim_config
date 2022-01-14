@@ -1,15 +1,27 @@
+set encoding=UTF-8
+
 if has('win32')
  source ~/AppData/local/nvim/plug.vim
 else
   source ~/.config/nvim/plug.vim
 endif
 
+""" general configuration
 set mouse=a
+set number
 
 "" set teme
 syntax enable
 colorscheme dracula
 
+
+""" pretier - config
+let g:prettier#config#single_quote = 'true'
+let g:prettier#config#printWidth = '140'
+let g:prettier#config#useTabs = 'false'
+let g:prettier#config#tabWidth = '2'
+let g:prettier#config#semi = 'true'
+let g:prettier#config#bracketSpacing = 'true'
 "" set tab with spaces
 set tabstop=2 shiftwidth=2 expandtab
 
@@ -37,8 +49,41 @@ nnoremap <silent> ;r <cmd>Telescope live_grep<cr>
 nnoremap <silent> \\ <cmd>Telescope buffers<cr>
 nnoremap <silent> ;; <cmd>Telescope help_tags<cr>
 
+" Remap keys for applying codeAction to the current line.
+nmap <silent> ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <silent> qf  <Plug>(coc-fix-current)
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use ctrl-[hjkl] to select the active split!
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
+
+
+""" git config
+" Use fontawesome icons as signs
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = '>'
+let g:gitgutter_sign_removed = '-'
+let g:gitgutter_sign_removed_first_line = '^'
+let g:gitgutter_sign_modified_removed = '<'
+
+" Update sign column every quarter second
+set updatetime=250
+
+""" end got config
+
 """ NerdTree config 
 let NERDTreeShowHidden=1
+
+" CoC extensions
+let g:coc_global_extensions = ['coc-tsserver']
 
 """ typescript config
 lua << EOF
@@ -142,29 +187,31 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 -- tresitter
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-    disable = {},
-  },
-  indent = {
-    enable = false,
-    disable = {},
-  },
-  ensure_installed = {
-    "tsx",
-    "toml",
-    "fish",
-    "php",
-    "json",
-    "yaml",
-    "swift",
-    "html",
-    "scss"
-  },
-}
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.tsx.used_by = { "javascript", "typescript.tsx" }
+--if has('unix')
+--	require'nvim-treesitter.configs'.setup {
+--	  highlight = {
+--	    enable = true,
+--	    disable = {},
+--	  },
+--	  indent = {
+--	    enable = false,
+--	    disable = {},
+--	  },
+--	  ensure_installed = {
+--	    "tsx",
+--	    "toml",
+--	    "fish",
+--	    "php",
+--	    "json",
+--	    "yaml",
+--	    "swift",
+--	    "html",
+--	    "scss"
+--	  },
+--	}
+--	local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+--	parser_config.tsx.used_by = { "javascript", "typescript.tsx" }
+--endif
 
 local actions = require('telescope.actions')
 require('telescope').setup{

@@ -61,7 +61,7 @@ nvim_lsp.tsserver.setup{on_attach=custom_attach}
 
 nvim_lsp.diagnosticls.setup {
 	on_attach = on_attach,
-  filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'pandoc' },
+  filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss' },
   init_options = {
     linters = {
       eslint = {

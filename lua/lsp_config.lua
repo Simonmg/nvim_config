@@ -18,7 +18,7 @@ require('telescope').setup{
 }
 
 local custom_attach = function(client, bufnr)
-	print("LSP server started.");
+	print("Wellcome simon, LSP server started.");
 	
 	
 	map('n','gD','<cmd>lua vim.lsp.buf.declaration()<CR>')
@@ -38,6 +38,7 @@ local custom_attach = function(client, bufnr)
 	map('n','<leader>ai','<cmd>lua vim.lsp.buf.incoming_calls()<CR>')
 	map('n','<leader>ao','<cmd>lua vim.lsp.buf.outgoing_calls()<CR>')
 
+
 	if client.resolved_capabilities.document_formating then
 		vim.api.nvim_command [[augroup Format]]
     vim.api.nvim_command [[autocmd! * <buffer>]]
@@ -45,8 +46,8 @@ local custom_attach = function(client, bufnr)
     vim.api.nvim_command [[augroup END]]
 	end
 
-	require'completion'.on_attach(client)
-	
+	require'completion'.on_attach(client, bufnr)
+
 end
 
 saga.init_lsp_saga {
@@ -55,66 +56,6 @@ saga.init_lsp_saga {
   hint_sign = '',
   infor_sign = '',
   border_style = "round",
-}
-
-nvim_lsp.tsserver.setup{on_attach=custom_attach}
-
-nvim_lsp.diagnosticls.setup {
-	on_attach = on_attach,
-  filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss' },
-  init_options = {
-    linters = {
-      eslint = {
-        command = 'eslint_d',
-        rootPatterns = { '.git' },
-        debounce = 100,
-        args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
-        sourceName = 'eslint_d',
-        parseJson = {
-          errorsRoot = '[0].messages',
-          line = 'line',
-          column = 'column',
-          endLine = 'endLine',
-          endColumn = 'endColumn',
-          message = '[eslint] ${message} [${ruleId}]',
-          security = 'severity'
-        },
-        securities = {
-          [2] = 'error',
-          [1] = 'warning'
-        }
-      },
-    },
-    filetypes = {
-      javascript = 'eslint',
-      javascriptreact = 'eslint',
-      typescript = 'eslint',
-      typescriptreact = 'eslint',
-    },
-    formatters = {
-      eslint_d = {
-        command = 'eslint_d',
-        args = { '--stdin', '--stdin-filename', '%filename', '--fix-to-stdout' },
-        rootPatterns = { '.git' },
-      },
-      prettier = {
-        command = 'prettier',
-        args = { '--stdin-filepath', '%filename' }
-      }
-    },
-    formatFiletypes = {
-      css = 'prettier',
-      javascript = 'eslint_d',
-      javascriptreact = 'eslint_d',
-      json = 'prettier',
-      scss = 'prettier',
-      less = 'prettier',
-      typescript = 'eslint_d',
-      typescriptreact = 'eslint_d',
-      json = 'prettier',
-      markdown = 'prettier',
-    }
-  }
 }
 
 -- icon
@@ -128,3 +69,70 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     }
   }
 )
+
+
+require("null-ls").setup({
+	debug=true,
+	sources = { require("null-ls").builtins.formatting.prettier },
+})
+
+require("nvim-treesitter.configs").setup {
+	highlight = {
+    enable = true,
+    disable = {},
+  },
+  indent = {
+    enable = false,
+    disable = {},
+  },
+  ensure_installed = {
+    "tsx",
+    "toml",
+    "fish",
+    "php",
+    "json",
+    "yaml",
+    "swift",
+    "html",
+    "scss"
+  },
+}
+
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
+
+local status, lualine = pcall(require, "lualine")
+if (not status) then return end
+lualine.setup {
+  options = {
+    icons_enabled = true,
+    theme = 'solarized_dark',
+    section_separators = {'', ''},
+    component_separators = {'', ''},
+    disabled_filetypes = {}
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch'},
+    lualine_c = {'filename'},
+    lualine_x = {
+      { 'diagnostics', sources = {"nvim_lsp"}, symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '} },
+      'encoding',
+      'filetype'
+    },
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {'fugitive'}
+}
+
+nvim_lsp["tsserver"].setup{on_attach=custom_attach}

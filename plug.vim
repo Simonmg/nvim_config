@@ -19,5 +19,6 @@ if has("nvim")
 		Plug 'MunifTanjim/prettier.nvim'
 		Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 		Plug 'hoob3rt/lualine.nvim'
+		Plug 'mhartington/formatter.nvim'
 endif
 call plug#end()

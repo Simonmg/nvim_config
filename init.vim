@@ -48,5 +48,7 @@ nnoremap <silent> ;; <cmd>Telescope help_tags<cr>
 
 let g:completion_enable_popup = 1
 
+""" formatting
+nnoremap <silent> <leader>f :Format<CR>
 
 lua require("lsp_config")

@@ -1,4 +1,5 @@
 local nvim_lsp = require('lspconfig')
+local coq = require("coq")
 local saga = require 'lspsaga'
 
 local map = function(type, key, value)
@@ -20,7 +21,6 @@ require('telescope').setup{
 local custom_attach = function(client, bufnr)
 	print("Wellcome simon, LSP server started.");
 	
-	
 	map('n','gD','<cmd>lua vim.lsp.buf.declaration()<CR>')
 	map('n','gd','<cmd>lua vim.lsp.buf.definition()<CR>')
 	map('n','K','<cmd>lua vim.lsp.buf.hover()<CR>')
@@ -38,15 +38,6 @@ local custom_attach = function(client, bufnr)
 	map('n','<leader>ai','<cmd>lua vim.lsp.buf.incoming_calls()<CR>')
 	map('n','<leader>ao','<cmd>lua vim.lsp.buf.outgoing_calls()<CR>')
 
-
-	if client.resolved_capabilities.document_formating then
-		vim.api.nvim_command [[augroup Format]]
-    vim.api.nvim_command [[autocmd! * <buffer>]]
-    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
-    vim.api.nvim_command [[augroup END]]
-	end
-
-	require'completion'.on_attach(client, bufnr)
 
 end
 
@@ -150,6 +141,7 @@ nvim_lsp.diagnosticls.setup {
         sourceName = "eslint",
         command = "./node_modules/.bin/eslint",
         rootPatterns = {
+					".eslintrc.json",
           ".eslitrc.js",
           "package.json"
         },

@@ -25,5 +25,6 @@ if has("nvim")
 		Plug 'neoclide/coc.nvim', {'branch': 'release'}
 		Plug 'nvim-lualine/lualine.nvim'
 		Plug 'kyazdani42/nvim-web-devicons'
+		Plug 'tpope/vim-fugitive'
 endif
 call plug#end()

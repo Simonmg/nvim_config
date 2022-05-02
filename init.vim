@@ -18,6 +18,9 @@ set number
 syntax enable
 colorscheme dracula
 
+set fileformat=unix
+set noswapfile
+
 """ hover doc
 """ nnoremap <silent>K :Lspsaga hover_doc<CR>
 
@@ -216,6 +219,13 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " coc-prettier
 command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+" coc-eslint
+command! -nargs=0 Eslint :CocCommand eslint.executeAutofix
 
+"" Find files Telescope
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 lua require("lua_config")

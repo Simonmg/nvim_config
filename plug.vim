@@ -5,6 +5,7 @@ endif
 call plug#begin()
 if has("nvim")
     Plug 'dracula/vim', { 'as': 'dracula' }
+		Plug 'sonph/onehalf', { 'rtp': 'vim' }
     Plug 'preservim/nerdtree'
     Plug 'neovim/nvim-lspconfig'
 		Plug 'glepnir/lspsaga.nvim'

@@ -7,16 +7,25 @@ else
 endif
 
 """ tab configuration
-set tabstop=2
-set shiftwidth=2
-
+set tabstop=2 shiftwidth=2 expandtab
 """ general configuration
 set mouse=a
 set number
 
+set clipboard+=unnamedplus
+
 "" set teme
+syntax on
+
+"""" enable 24bit true color
+" If you have vim >=8.0 or Neovim >= 0.1.5
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+"""" enable the theme
 syntax enable
-""colorscheme dracula
+colorscheme shades_of_purple
 
 set fileformat=unix
 set noswapfile
@@ -24,11 +33,12 @@ set noswapfile
 syntax on
 set cursorline
 
-colorscheme onehalfdark
-let g:airline_theme='onehalfdark'
+"" colorscheme onehalfdark
+"" let g:airline_theme='onehalfdark':with
 
 " lightline
-let g:lightline = { 'colorscheme': 'onehalfdark' }
+let g:shades_of_purple_lightline = 1
+let g:lightline = { 'colorscheme': 'shades_of_purple' }
 
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -36,39 +46,10 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-"
-""" hover doc
-""" nnoremap <silent>K :Lspsaga hover_doc<CR>
+"" git nerdTree
+let g:NERDTreeGitStatusUseNerdFonts = 1
 
-""" Signature help
-""" inoremap <silent> <C-k> <cmd>Lspsaga signature_help<CR>
-
-""" Async LSP Finder
-""" nnoremap <silent> gh <cmd>Lspsaga lsp_finder<CR>
-
-""" nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
-""" nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>
-
-"" set completeopt=menuone,noinsert,noselect
-
-" Use <Tab> and <S-Tab> to navigate through popup menu
-""" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-""" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-""" Telescope config
-""" nnoremap <silent> ;f <cmd>Telescope find_files<cr>
-""" nnoremap <silent> ;r <cmd>Telescope live_grep<cr>
-""" nnoremap <silent> \\ <cmd>Telescope buffers<cr>
-""" nnoremap <silent> ;; <cmd>Telescope help_tags<cr>
-
-""" auto popup
-
-""" let g:completion_enable_popup = 1
-
-""" formatting
-""" nnoremap <silent> <leader>f :Format<CR>
-
-""" lua require("lsp_config")
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " TextEdit might fail if hidden is not set.
 set hidden

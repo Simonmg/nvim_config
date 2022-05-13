@@ -27,5 +27,8 @@ if has("nvim")
 		Plug 'nvim-lualine/lualine.nvim'
 		Plug 'kyazdani42/nvim-web-devicons'
 		Plug 'tpope/vim-fugitive'
+    Plug 'Rigellute/shades-of-purple.vim' 
+    Plug 'preservim/nerdtree' |
+            \ Plug 'Xuyuanp/nerdtree-git-plugin'
 endif
 call plug#end()

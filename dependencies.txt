@@ -1,0 +1,5 @@
+-- tsserver
+npm install -g typescript typescript-language-server
+--- eslint
+npm i -g vscode-langservers-extracted
+

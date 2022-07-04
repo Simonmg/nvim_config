@@ -3,32 +3,37 @@ if has("nvim")
 endif
 
 call plug#begin()
+
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+
 if has("nvim")
-    Plug 'dracula/vim', { 'as': 'dracula' }
-		Plug 'sonph/onehalf', { 'rtp': 'vim' }
-    Plug 'preservim/nerdtree'
-    Plug 'neovim/nvim-lspconfig'
-		Plug 'glepnir/lspsaga.nvim'
-		Plug 'nvim-lua/completion-nvim'
-		Plug 'nvim-lua/diagnostic-nvim'
-		Plug 'nvim-lua/completion-nvim'
-		Plug 'nvim-lua/popup.nvim'
-		Plug 'nvim-lua/plenary.nvim'
-		Plug 'nvim-telescope/telescope.nvim'
-		Plug 'neovim/nvim-lspconfig'
-		Plug 'jose-elias-alvarez/null-ls.nvim'
-		Plug 'MunifTanjim/prettier.nvim'
-		Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-		Plug 'mhartington/formatter.nvim'
-		Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-		Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-		Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
-		Plug 'neoclide/coc.nvim', {'branch': 'release'}
-		Plug 'nvim-lualine/lualine.nvim'
-		Plug 'kyazdani42/nvim-web-devicons'
-		Plug 'tpope/vim-fugitive'
-    Plug 'Rigellute/shades-of-purple.vim' 
-    Plug 'preservim/nerdtree' |
-            \ Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'hoob3rt/lualine.nvim'
+  Plug 'kristijanhusak/defx-git'
+  Plug 'kristijanhusak/defx-icons'
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'williamboman/nvim-lsp-installer'
+  Plug 'tami5/lspsaga.nvim'
+  Plug 'folke/lsp-colors.nvim'
+  Plug 'L3MON4D3/LuaSnip'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'onsails/lspkind-nvim'
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'  
+  Plug 'windwp/nvim-autopairs'
+  Plug 'windwp/nvim-ts-autotag'
+  Plug 'williamboman/nvim-lsp-installer'
+  Plug 'neovim/nvim-lspconfig'
 endif
+
+Plug 'groenewege/vim-less', { 'for': 'less' }
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+
 call plug#end()
+

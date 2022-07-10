@@ -6,6 +6,25 @@ else
   source ~/.config/nvim/plug.vim
 endif
 
+set nocompatible
+set number
+syntax enable
+set fileencodings=utf-8,sjis,euc-jp,latin
+set encoding=utf-8
+set title
+set autoindent
+set background=dark
+set nobackup
+set hlsearch
+set showcmd
+set cmdheight=1
+set laststatus=2
+set scrolloff=10
+set expandtab
+"let loaded_matchparen = 1
+set shell=fish
+set backupskip=/tmp/*,/private/tmp/*
+
 """ tab configuration
 set tabstop=2 shiftwidth=2 expandtab
 """ general configuration
@@ -13,12 +32,20 @@ set mouse=a
 set number
 set clipboard+=unnamedplus
 
-"""" enable the theme
-packadd! dracula
-syntax enable
-colorscheme dracula
+" true color
+if exists("&termguicolors") && exists("&winblend")
+  syntax enable
+  set termguicolors
+  set winblend=0
+  set wildoptions=pum
+  set pumblend=5
+  set background=dark
+  " Use NeoSolarized
+  let g:neosolarized_termtrans=1
+  runtime ./colors/NeoSolarized.vim
+  colorscheme NeoSolarized
+endif
 
-set fileformat=unix
 set noswapfile
 
 syntax on
